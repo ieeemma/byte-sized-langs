@@ -9,7 +9,7 @@ M=lambda p,a:(z:=[*zip(p,a)])and M(*z[1])|dict([z[0]])if p else{}
 def E(x,e):
  if X(x)!=list:return e[x]if X(x)==str else x
  f=E(x[0],e);m=f[0]=='!';f=f[m:];a=x[1]if m else F([E(y,e)for y in T(x[1])])
- return eval(f,globals()|{'A':a}|M(F('eabc'[:len(T(a))+1]),[e,a]))if X(f)==str else E(f[1],e|M(f[0],a))
+ return eval(f,globals()|{'A':a}|M(F('eabc'[:len(T(a))+1]),[e,a]))if X(f)==str else E(q,e)if(q:=E(f[1],e|M(f[0],a)))and m else q
 def I(a,b,c):a[b]=c
-V={'quote':'!a','=':'!I(e,a,E(b,e))','lambda':'![a,b]','if':'!E([b,c][not E(a,e)],e)','let':'!E(c,e|{a:E(b,e)})','do':'T(A)[-1]','cons':'[a,b]','car':'a[0]','cdr':'a[1]','car=':'I(a,0,b)','cdr=':'I(a,1,b)','list':'A','+':'a+b','-':'a-b','*':'a*b','/':'a/b','==':'a==b','&':'a and b','|':'a or b','print':'print(a)','exit':'exit(a)','t?':'X(a).__name__==b',}
+V={'quote':'!a','=':'!I(e,a,E(b,e))','lambda':'![a,b]','macro':'!["!",a,b]','if':'!E([b,c][not E(a,e)],e)','let':'!E(c,e|{a:E(b,e)})','do':'T(A)[-1]','cons':'[a,b]','car':'a[0]','cdr':'a[1]','car=':'I(a,0,b)','cdr=':'I(a,1,b)','list':'A','+':'a+b','-':'a-b','*':'a*b','/':'a/b','==':'a==b','&':'a and b','|':'a or b','print':'print(a)','exit':'exit(a)','type':'X(a).__name__',}
 for e in T(S()):E(e,V)
