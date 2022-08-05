@@ -3,30 +3,18 @@
 
 i = "(λx. x)(λx. x)"
 t=__import__('re').findall(r'[().λ]|[a-z]+',i)
+z=t.pop
 
-def expr():
-  if t[0] == "λ":
-    t.pop(0)
-    n = t.pop(0)
-    t.pop(0)
-    return [n, expr()]
-  else:
-    return app()
+# def E():
+#  if t[0]=="λ":return[[z(0),z(0),z(0)][1],E()]
+#  x=A()
+#  while t and t[0]!=")":x=(x,A())
+#  return x
 
-def app():
-  x = atom()
-  while t and t[0] != ")":
-    x = (x, atom())
-  return x
+E=lambda:[[z(0),z(0),z(0)][1],E()]if t[0]=="λ"else(lambda x:x if t and t[0]==")"else(x,A()))(A())
 
-def atom():
-  s = t.pop(0)
-  if s == "(":
-    x = expr()
-    t.pop(0)
-    return x
-  else:
-    return s
+A=lambda:(m:=z(0))and([E(),z(0)][0]if m=="("else m)
+
 
 def fmt(x, p):
   z = type(x)
@@ -56,7 +44,7 @@ def reduce(x):
   else:
     return x
 
-x=expr()
+x=E()
 while (y:=reduce(x))!=x:x=y
 
 print(fmt(x,0))
